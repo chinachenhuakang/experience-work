@@ -1,0 +1,26 @@
+  CORS
+    CORS （Cross-Origin Resource Sharing，跨域资源共享）是一个系统，它由一系列传输的HTTP 头组成，这些 HTTP 头决定浏览器是否阻止前端 JavaScript 代码获取跨域请求的响应。
+
+浏览器的同源策略
+  同源策略是一个重要的安全策略，它用于限制一个origin的文档或者它加载的脚本如何能与另一个源的资源进行交互。它能帮助阻隔恶意文档，减少可能被攻击的媒介。
+  如果两个 URL 的 protocol、port (en-US) (如果有指定的话) 和 host 都相同的话，则这两个 URL 是同源。这个方案也被称为“协议/主机/端口元组”，或者直接是 “元组”。（“元组” 是指一组项目构成的整体，双重/三重/四重/五重/等的通用形式）。
+
+源的更改
+  document.domain = "company.com";
+
+
+
+http请求中
+
+Cache-Control：no-store 设置最安全
+
+在所有 SSL 页面及含有敏感数据的所有页面上，禁用高速缓存。
+通过使用你您 SSL 页面标题中的“Cache-Control: no-store”和“Pragma: no-cache”或“Cache-Control: no-cache”响应伪指令来实现此操作。Cache-Control: private - 此伪指令可向代理指示某个页面中包含私有信息，因此不能由共享高速缓存进行高速缓存。但是，它不会指示浏览器阻止高速缓存此页面。
+Cache-Control：no-cache - 此伪指令也可向代理指示某个页面中包含私有信息，因此不能高速缓存。它还会指示浏览器重新验证服务器以检查是否有新的版本可用。这意味着浏览器可能会存储敏感页面或要在重新验证中使用的信息。某些浏览器不一定会跟踪 RFC，因此可能会将 no-cache视为 no-store。
+Cache-Control：no-store - 这是最安全的伪指令。它同时指示代理和浏览器不要高速缓存此页面或将其存储为它们的高速缓存文件夹。
+Pragma: no-cache - 对于不支持高速缓存控制标题的较旧浏览器，该伪指令是必需的。
+
+
+
+设置为新的淘宝镜像
+npm config set registry https://npmmirror.com
