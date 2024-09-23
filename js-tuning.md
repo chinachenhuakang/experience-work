@@ -12,13 +12,13 @@ const data = [
     { id: 87, parentId: 86 },
     { id: 62, parentId: 74 },
     { id: 86, parentId: 74 },
-  ];
-  const idMapping = data.reduce((acc, el, i) => {
+    ];
+    const idMapping = data.reduce((acc, el, i) => {
     acc[el.id] = i;
     return acc;
-  }, {});
-  let root;
-  data.forEach(el => {
+}, {});
+let root;
+data.forEach(el => {
     // 判断根节点
     if (el.parentId === null) {
       root = el;
@@ -28,4 +28,7 @@ const data = [
     const parentEl = data[idMapping[el.parentId]];
     // 把当前元素添加到父元素的`children`数组中
     parentEl.children = [...(parentEl.children || []), el];
-  });
+});
+```
+
+### 2、
