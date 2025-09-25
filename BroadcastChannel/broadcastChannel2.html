@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BroadcastChannel2</title>
+</head>
+<body>
+  <ul id="message" class="room">
+  </ul>
+  <div>
+    <input type="text" id="input">
+    <button onclick="handlePostMessage()">发送</button>
+  </div>
+</body>
+
+<script>
+  var channel = new BroadcastChannel('user_status_channel');
+  window.onload=()=>{
+    channel.postMessage('BroadcastChannel2 发消息了')
+  }
+
+  channel.addEventListener('message',(event)=>{
+    console.log('BroadcastChannel2 接收到了消息',event)
+    const msg = event.data
+    createMessage(msg)
+  })
+
+  window.onunload=()=>{
+    const msg = 'BroadcastChannel2 离开了'
+    channel.postMessage(msg)
+    createMessage(msg)
+    channel.close()
+  }
+
+  document.addEventListener('keydown',(event)=>{
+    if(event.key === 'Enter'){
+      handlePostMessage()
+    }
+  })
+
+  function handlePostMessage(){
+    const inputElement = document.getElementById('input')
+    channel.postMessage(inputElement.value)
+    createMessage(inputElement.value,true)
+    console.log('BroadcastChannel2 发送消息了',inputElement.value)
+    inputElement.value = ''
+  }
+
+  function createMessage(msg, isSelf = false){
+    const msgElement = document.getElementById('message')
+    const addMsg = document.createElement('li')
+    if(isSelf){
+      addMsg.className = 'send'
+    }
+    addMsg.textContent=msg
+    msgElement.appendChild(addMsg)
+  }
+
+
+
+</script>
+<style>
+  .room{
+    display: flex;
+    flex-direction: column;
+    list-style: none;
+    width: 30vw;
+    list-style: none;
+  }
+  .room > .send{
+    align-self: self-end;
+  }
+</style>
+</html>
